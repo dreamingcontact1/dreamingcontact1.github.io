@@ -203,6 +203,19 @@
         </figure>
         <figure class="explorer__video">
           <figcaption>
+            <span class="vlabel vlabel--base">Baseline · kinematic</span>
+            <span class="vdesc">Same trajectory, no force regulation</span>
+          </figcaption>
+          <div class="video-wrap">
+            <video id="v-base" data-kind="base"
+                   src="videos/whiteboard_run1_base.mp4?v=5"
+                   poster="videos/whiteboard_run1_base.jpg?v=5"
+                   loop playsinline preload="metadata" controls muted></video>
+            <span class="video-badge">2×</span>
+          </div>
+        </figure>
+        <figure class="explorer__video">
+          <figcaption>
             <span class="vlabel vlabel--ours">Ours · force-aware</span>
             <span class="vdesc">Franka arm tracks the audio-derived force profile</span>
           </figcaption>
@@ -216,19 +229,6 @@
           <div class="ours-plot">
             <img id="force-plot" src="figs/whiteboard_run1_force.png?v=5"
                  alt="Measured contact force over time — whiteboard, run 1." />
-          </div>
-        </figure>
-        <figure class="explorer__video">
-          <figcaption>
-            <span class="vlabel vlabel--base">Baseline · kinematic</span>
-            <span class="vdesc">Same trajectory, no force regulation</span>
-          </figcaption>
-          <div class="video-wrap">
-            <video id="v-base" data-kind="base"
-                   src="videos/whiteboard_run1_base.mp4?v=5"
-                   poster="videos/whiteboard_run1_base.jpg?v=5"
-                   loop playsinline preload="metadata" controls muted></video>
-            <span class="video-badge">2×</span>
           </div>
         </figure>
       </div>

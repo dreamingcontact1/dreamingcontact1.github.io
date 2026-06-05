@@ -200,7 +200,8 @@ code, pre, .mono {
   padding-bottom: 4px;
 }
 .hero__subtitle { font-size: 18px; color: var(--ink-muted); margin-top: 14px; max-width: 44ch; }
-.hero__authors { margin-top: 12px; font-size: 13px; color: var(--ink-muted); }
+.hero__authors { margin-top: 12px; font-size: 15px; color: var(--ink); }
+.hero__authors-note { display: block; margin-top: 4px; font-size: 12px; color: var(--ink-muted); }
 
 /* ---- Hero visual: concept figure (transparent, no card) ---- */
 .hero__visual {

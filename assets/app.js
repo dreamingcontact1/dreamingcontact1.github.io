@@ -23,22 +23,21 @@
 
   // --- Video explorer: task tabs + run dropdown swap video sources ---
   const TASKS = {
-    whiteboard: { label: 'Whiteboard wiping', success: { ours: 6, base: 0, total: 6 } },
-    carrot:     { label: 'Carrot peeling',    success: { ours: 5, base: 1, total: 6 } },
-    lamp:       { label: 'Lamp button',       success: { ours: 4, base: 0, total: 6 } }
+    whiteboard: { label: 'Whiteboard wiping',      success: { ours: 6, base: 0, total: 6 } },
+    carrot:     { label: 'Carrot peeling',         success: { ours: 4, base: 1, total: 6 } },
+    chocolate:  { label: 'Chocolate box stacking', success: { ours: 5, base: 0, total: 6 } },
+    lamp:       { label: 'Lamp button',            success: { ours: 4, base: 0, total: 6 } }
   };
 
-  const taskSelect = document.getElementById('task-dropdown');
-  const runSelect  = document.getElementById('run-dropdown');
+  const taskBtns   = Array.from(document.querySelectorAll('.seg--task .seg__btn'));
+  const runBtns    = Array.from(document.querySelectorAll('.seg--run .seg__btn'));
   const oursPill   = document.getElementById('score-ours');
   const basePill   = document.getElementById('score-base');
-  const audioPlot  = document.getElementById('audio-plot');
-  const forcePlot  = document.getElementById('force-plot');
   const vidKinds   = ['gen', 'ours', 'base'];
   const exVideos   = Object.fromEntries(vidKinds.map(k => [k, document.getElementById('v-' + k)]));
 
   // Bump MEDIA_REV whenever videos or posters are rebuilt so caches invalidate.
-  const MEDIA_REV = '5';
+  const MEDIA_REV = '6';
   let currentTask = 'whiteboard';
   let currentRun  = 1;
 
@@ -55,32 +54,30 @@
         el.setAttribute('src', src);
         el.load();
         el.muted = true;
+        // resume playback once the new source is ready (muted autoplay is allowed);
+        // calling play() synchronously after load() gets aborted by the load reset.
+        el.addEventListener('loadeddata', () => { el.play().catch(() => {}); }, { once: true });
       }
     });
     if (oursPill) oursPill.textContent = `${t.success.ours} / ${t.success.total} ours`;
     if (basePill) basePill.textContent = `${t.success.base} / ${t.success.total} base`;
-    if (audioPlot) {
-      audioPlot.src = `figs/${currentTask}_run${currentRun}_audio.png?v=${MEDIA_REV}`;
-      audioPlot.alt = `Audio loudness over time — ${t.label}, run ${currentRun}.`;
-    }
-    if (forcePlot) {
-      forcePlot.src = `figs/${currentTask}_run${currentRun}_force.png?v=${MEDIA_REV}`;
-      forcePlot.alt = `Measured contact force over time — ${t.label}, run ${currentRun}.`;
-    }
+    taskBtns.forEach(b => b.classList.toggle('is-active', b.dataset.task === currentTask));
+    runBtns.forEach(b => b.classList.toggle('is-active', parseInt(b.dataset.run, 10) === currentRun));
   }
 
-  if (taskSelect) {
-    taskSelect.addEventListener('change', () => {
-      currentTask = taskSelect.value;
+  taskBtns.forEach(b => b.addEventListener('click', () => {
+    if (currentTask !== b.dataset.task) {
+      currentTask = b.dataset.task;
       paintExplorer();
-    });
-  }
-  if (runSelect) {
-    runSelect.addEventListener('change', () => {
-      currentRun = parseInt(runSelect.value, 10) || 1;
+    }
+  }));
+  runBtns.forEach(b => b.addEventListener('click', () => {
+    const r = parseInt(b.dataset.run, 10) || 1;
+    if (currentRun !== r) {
+      currentRun = r;
       paintExplorer();
-    });
-  }
+    }
+  }));
 
   // Explorer videos all loop muted in parallel so the user sees the
   // comparison side-by-side. When the user unmutes one, re-mute the others

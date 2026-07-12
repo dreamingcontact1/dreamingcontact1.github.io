@@ -106,7 +106,7 @@
           <h1>Dreaming the Sound of&nbsp;Contact</h1>
           <p class="hero__subtitle">Leveraging video and audio generation for zero-shot force-aware manipulation.</p>
           <p class="hero__authors">
-            Guanhua Ji<sup>*</sup>, Tianyu Li<sup>*</sup>, Dayoon Suh, Nadia Figueroa
+            Guanhua Ji<sup>*</sup>, Tianyu Li<sup>*</sup>, Dayoon Suh, Yuqian Zhang, Boyan Zhang, Nadia Figueroa
             <span class="hero__authors-note"><sup>*</sup>Equal contribution</span>
           </p>
           <div class="btn-row">
@@ -129,8 +129,8 @@
 
         <!-- Concept figure on transparent background, no card treatment. -->
         <div class="hero__visual">
-          <img src="figs/concept.png?v=5"
-               alt="Concept overview: three stacked panels showing generated video and audio, a robot contact point on a whiteboard with force-direction and audio-magnitude annotations, and three real-world execution tasks — wiping, peeling, and lamp pressing."/>
+          <img src="figs/concept.png?v=7"
+               alt="Concept overview: three stacked panels showing generated video and audio, a robot contact point with force-direction and audio-magnitude annotations, and real-world execution examples — wiping, peeling, and lamp pressing."/>
         </div>
       </div>
     </section>
@@ -147,23 +147,11 @@
       </div>
 
       <div class="explorer__bar">
-        <div class="explorer__meta">
-          <label class="run-select run-select--task">
-            <span>Task</span>
-            <select id="task-dropdown" aria-label="Select task">
-              <option value="whiteboard">Whiteboard wiping</option>
-              <option value="carrot">Carrot peeling</option>
-              <option value="lamp">Lamp button</option>
-            </select>
-          </label>
-
-          <div class="pick-prompt">
-            <svg class="pick-prompt__arrow" viewBox="0 0 48 24" width="48" height="24" aria-hidden="true">
-              <polyline points="14,6 6,12 14,18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M8 12 C 20 12, 32 12, 46 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 4"/>
-            </svg>
-            <span class="pick-prompt__text">choose a task</span>
-          </div>
+        <div class="seg seg--task" role="tablist" aria-label="Select task">
+          <button type="button" class="seg__btn is-active" data-task="whiteboard">Whiteboard wiping</button>
+          <button type="button" class="seg__btn" data-task="carrot">Carrot peeling</button>
+          <button type="button" class="seg__btn" data-task="chocolate">Chocolate box stacking</button>
+          <button type="button" class="seg__btn" data-task="lamp">Lamp button</button>
         </div>
 
         <div class="explorer__right">
@@ -171,17 +159,15 @@
             <span class="score__pill score__pill--ours num" id="score-ours">6 / 6 ours</span>
             <span class="score__pill score__pill--base num" id="score-base">0 / 6 base</span>
           </span>
-          <label class="run-select">
-            <span>Run</span>
-            <select id="run-dropdown" aria-label="Select run">
-              <option value="1">1 of 6</option>
-              <option value="2">2 of 6</option>
-              <option value="3">3 of 6</option>
-              <option value="4">4 of 6</option>
-              <option value="5">5 of 6</option>
-              <option value="6">6 of 6</option>
-            </select>
-          </label>
+          <div class="seg seg--run" role="tablist" aria-label="Select run">
+            <span class="seg__caption">Run</span>
+            <button type="button" class="seg__btn is-active" data-run="1">1</button>
+            <button type="button" class="seg__btn" data-run="2">2</button>
+            <button type="button" class="seg__btn" data-run="3">3</button>
+            <button type="button" class="seg__btn" data-run="4">4</button>
+            <button type="button" class="seg__btn" data-run="5">5</button>
+            <button type="button" class="seg__btn" data-run="6">6</button>
+          </div>
         </div>
       </div>
 
@@ -192,14 +178,9 @@
             <span class="vdesc">Video + Audio from Seedance 2.0</span>
           </figcaption>
           <video id="v-gen" data-kind="gen"
-                 src="videos/whiteboard_run1_gen.mp4?v=5"
-                 poster="videos/whiteboard_run1_gen.jpg?v=5"
+                 src="videos/whiteboard_run1_gen.mp4?v=6"
+                 poster="videos/whiteboard_run1_gen.jpg?v=6"
                  loop playsinline preload="metadata" controls muted></video>
-          <div class="ours-plot">
-            <img id="audio-plot" src="figs/whiteboard_run1_audio.png?v=5"
-                 alt="Audio loudness over time — whiteboard, run 1." />
-            <p class="ours-plot__caption muted">The video plays the full generated audio. The plot only keeps frames where SAM-audio and distance confirm real contact, which is what we use to drive execution.</p>
-          </div>
         </figure>
         <figure class="explorer__video">
           <figcaption>
@@ -208,8 +189,8 @@
           </figcaption>
           <div class="video-wrap">
             <video id="v-base" data-kind="base"
-                   src="videos/whiteboard_run1_base.mp4?v=5"
-                   poster="videos/whiteboard_run1_base.jpg?v=5"
+                   src="videos/whiteboard_run1_base.mp4?v=6"
+                   poster="videos/whiteboard_run1_base.jpg?v=6"
                    loop playsinline preload="metadata" controls muted></video>
             <span class="video-badge">2×</span>
           </div>
@@ -221,14 +202,10 @@
           </figcaption>
           <div class="video-wrap">
             <video id="v-ours" data-kind="ours"
-                   src="videos/whiteboard_run1_ours.mp4?v=5"
-                   poster="videos/whiteboard_run1_ours.jpg?v=5"
+                   src="videos/whiteboard_run1_ours.mp4?v=6"
+                   poster="videos/whiteboard_run1_ours.jpg?v=6"
                    loop playsinline preload="metadata" controls muted></video>
             <span class="video-badge">2×</span>
-          </div>
-          <div class="ours-plot">
-            <img id="force-plot" src="figs/whiteboard_run1_force.png?v=5"
-                 alt="Measured contact force over time — whiteboard, run 1." />
           </div>
         </figure>
       </div>
@@ -251,9 +228,14 @@
           We present a pipeline that jointly leverages generated video and audio to recover both motion
           trajectories and contact force profiles from a single task description. We execute these force-aware
           trajectories on a Franka Panda robot using a closed-loop force regulator that tracks the audio-derived
-          force profile during contact. Real-robot experiments on whiteboard wiping, carrot peeling, and lamp
-          button pressing demonstrate that our force-aware pipeline enables successful contact-rich manipulation
-          from video generation where a kinematic-only baseline fails.
+          force profile during contact. Real-robot experiments across four contact-rich tasks — whiteboard
+          wiping, carrot peeling, box stacking, and button pressing — demonstrate that our force-aware pipeline
+          enables successful manipulation from video generation, where a kinematic-only baseline fails.
+        </p>
+        <p>
+          We further show that the pipeline can serve as an automated force-aware data-generation engine:
+          a closed-loop policy trained on the generated demonstrations generalizes across object placements
+          and appearances.
         </p>
       </div>
     </section>
@@ -263,11 +245,45 @@
       <p class="kicker">Pipeline</p>
       <h2>Audio as the force signal.</h2>
       <p>
-        Our vision pipeline segments objects (SAM&nbsp;2), estimates depth (Depth&nbsp;Pro), and tracks 3D points
-        (SpaTracker) to detect contacts and infer force directions. The audio pipeline extracts loudness as a
-        force-magnitude proxy. A 1&nbsp;kHz impedance controller closes the loop on the audio-derived force profile.
+        Our vision pipeline localizes the object and gripper (MolmoPoint), segments them (SAM&nbsp;2), and
+        recovers depth and 3D point tracks (TAPIP3D) to detect contacts and infer force directions. The audio
+        pipeline isolates the contact sound (SAM-Audio) and extracts loudness as a force-magnitude proxy.
+        A 1&nbsp;kHz impedance controller closes the loop on the audio-derived force profile.
       </p>
-      <img src="figs/pipeline.png?v=5" alt="Pipeline diagram: vision branch segments, tracks, and estimates force direction; audio branch extracts loudness; the combined force-aware trajectory runs on a Franka Panda with closed-loop force regulation." />
+      <img src="figs/pipeline.png?v=6" alt="Pipeline diagram: vision branch localizes, segments, and tracks in 3D to estimate force direction; audio branch isolates the contact sound and extracts loudness; the combined force-aware trajectory runs on a Franka Panda with closed-loop force regulation." />
+    </section>
+
+    <!-- 4b. POLICY LEARNING ================================== -->
+    <section class="abstract section section--divided reveal" id="policy">
+      <p class="kicker">Policy Learning</p>
+      <h2>The pipeline is also a data engine.</h2>
+      <div class="abstract__body">
+        <p>
+          Beyond single-trajectory execution, we use the pipeline to <strong>generate training data</strong>:
+          for whiteboard wiping and carrot peeling, we place the object at five positions, run the full
+          force-aware pipeline at each, and collect 50 demonstrations per task. A CNN-based
+          <strong>Diffusion Policy</strong> trained on these demonstrations — from RGB observations and
+          end-effector pose only, with <em>no force input</em> — succeeds in <strong class="num">8/10</strong>
+          trials on both tasks, generalizing to unseen object placements and appearances.
+        </p>
+        <p>
+          Because the demonstrations are collected under force-aware execution, the recorded poses already
+          encode the contact behavior: at rollout the position-only policy implicitly reproduces sustained
+          ~8&nbsp;N contact while wiping and repeated 4–5&nbsp;N peeling strokes, without any force regulator
+          at test time. A kinematic-only version of the same scheme yields mostly failed interactions,
+          unsuitable for learning.
+        </p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;align-items:start">
+        <img src="figs/policy_setup_wiping.png?v=6" style="width:100%;height:auto;border-radius:14px"
+             alt="Data-collection and rollout setup for whiteboard wiping: Franka Panda with a wrist-mounted RealSense D435 and an external RealSense L515."/>
+        <img src="figs/policy_setup_peeling.png?v=6" style="width:100%;height:auto;border-radius:14px"
+             alt="Data-collection and rollout setup for carrot peeling: two Franka Panda arms with wrist and external RealSense cameras."/>
+        <img src="figs/policy_force_whiteboard.png?v=6" style="width:100%;height:auto;border-radius:14px;background:#fff"
+             alt="Measured contact force during a closed-loop policy rollout on whiteboard wiping: sustained contact around 8 newtons."/>
+        <img src="figs/policy_force_carrot.png?v=6" style="width:100%;height:auto;border-radius:14px;background:#fff"
+             alt="Measured contact force during a closed-loop policy rollout on carrot peeling: repeated 4 to 5 newton peeling strokes."/>
+      </div>
     </section>
 
 

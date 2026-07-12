@@ -337,8 +337,8 @@ code, pre, .mono {
 }
 
 /* ============ ABSTRACT (editorial, no card) ============ */
-.abstract h2 { max-width: 24ch; }
-.abstract__body { max-width: 70ch; }
+.abstract h2 { max-width: none; }
+.abstract__body { max-width: none; text-align: justify; }
 
 /* ============ PIPELINE (keep the aurora card) ========== */
 .pipeline { padding: 24px 28px; }
@@ -350,7 +350,7 @@ code, pre, .mono {
   padding: 8px;
 }
 .pipeline h2 { margin-top: 2px; max-width: 22ch; }
-.pipeline p { color: #3a2f4a; max-width: 640px; margin-bottom: 0; }
+.pipeline p { color: #3a2f4a; max-width: none; text-align: justify; margin-bottom: 0; }
 
 /* ============ TASK RESULTS (sections, not cards) ======= */
 .results {
@@ -628,3 +628,21 @@ code, pre, .mono {
   .task__videos { grid-template-columns: 1fr; }
   .hero__visual { max-width: 340px; margin: 0 auto; }
 }
+
+/* Segmented task/run buttons (replace the old dropdowns) */
+.seg { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.seg__caption {
+  font-size: 12px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--ink-muted); margin-right: 2px;
+}
+.seg__btn {
+  appearance: none; -webkit-appearance: none;
+  border: 1px solid rgba(26,20,32,.14); background: #fff;
+  color: var(--ink); font: inherit; font-size: 13.5px; font-weight: 700;
+  padding: 8px 14px; border-radius: 999px; cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.seg__btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+.seg__btn.is-active { background: var(--ink); border-color: var(--ink); color: var(--ink-invert); }
+.seg__btn.is-active:hover { color: var(--ink-invert); transform: none; }
+.seg--run .seg__btn { min-width: 38px; padding: 8px 0; text-align: center; }

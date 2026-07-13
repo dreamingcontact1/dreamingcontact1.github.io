@@ -268,11 +268,12 @@
         </p>
         <p>
           Because the demonstrations are collected under force-aware execution, the recorded poses already
-          encode the contact behavior. Overlaying a rollout with a training demonstration on a common
-          <strong>task-progress</strong> axis (normalized end-effector path length, which factors out the
-          difference in execution speed) shows the policy entering contact at the same task stage and
-          reaching matching force magnitudes — without any force regulator at test time. A kinematic-only
-          version of the same scheme yields mostly failed interactions, unsuitable for learning.
+          encode the contact behavior. Comparing all demonstrations with all successful rollouts as
+          mean&nbsp;&plusmn;&nbsp;std over <strong>in-contact task progress</strong> (normalized end-effector
+          path length accumulated during contact, which factors out differences in execution speed and
+          object placement) shows the policy entering contact at the same task stage and reaching matching
+          force magnitudes — without any force regulator at test time. A kinematic-only version of the same
+          scheme yields mostly failed interactions, unsuitable for learning.
         </p>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;align-items:start">
@@ -280,10 +281,10 @@
              alt="Data-collection and rollout setup for whiteboard wiping: Franka Panda with a wrist-mounted RealSense D435 and an external RealSense L515."/>
         <img src="figs/policy_setup_peeling.png?v=6" style="width:100%;height:auto;border-radius:14px"
              alt="Data-collection and rollout setup for carrot peeling: two Franka Panda arms with wrist and external RealSense cameras."/>
-        <img src="figs/policy_force_whiteboard.png?v=8" style="width:100%;height:auto;border-radius:14px;background:#fff"
-             alt="Whiteboard wiping: contact force of a policy rollout overlaid with a training demonstration against task progress — both enter contact at the same stage with matching magnitudes."/>
-        <img src="figs/policy_force_carrot.png?v=8" style="width:100%;height:auto;border-radius:14px;background:#fff"
-             alt="Carrot peeling: contact force of a policy rollout overlaid with a training demonstration against task progress — closely matching force profiles."/>
+        <img src="figs/policy_force_whiteboard.png?v=10" style="width:100%;height:auto;border-radius:14px;background:#fff"
+             alt="Whiteboard wiping: mean and standard deviation of contact force for all training demonstrations and all successful policy rollouts over in-contact task progress — both enter contact at the same stage with matching magnitudes."/>
+        <img src="figs/policy_force_carrot.png?v=10" style="width:100%;height:auto;border-radius:14px;background:#fff"
+             alt="Carrot peeling: mean and standard deviation of contact force for all training demonstrations and all successful policy rollouts over in-contact task progress — closely matching force profiles."/>
       </div>
     </section>
 

@@ -37,12 +37,32 @@
   const exVideos   = Object.fromEntries(vidKinds.map(k => [k, document.getElementById('v-' + k)]));
 
   // Bump MEDIA_REV whenever videos or posters are rebuilt so caches invalidate.
-  const MEDIA_REV = '6';
+  const MEDIA_REV = '7';
   let currentTask = 'whiteboard';
   let currentRun  = 1;
 
+  // --- Group-synchronized looping -------------------------------------
+  // The three clips have different lengths. Instead of looping each one
+  // independently (which drifts them apart), every clip holds its last
+  // frame when it ends; once ALL clips have ended, they restart together.
+  const endedSet = new Set();
+  const readySet = new Set();
+  const activeKinds = () => vidKinds.filter(k => exVideos[k]);
+
+  function groupStart() {
+    readySet.clear();
+    endedSet.clear();
+    activeKinds().forEach(k => {
+      const el = exVideos[k];
+      try { el.currentTime = 0; } catch (e) {}
+      el.play().catch(() => {});
+    });
+  }
+
   function paintExplorer() {
     const t = TASKS[currentTask];
+    readySet.clear();
+    endedSet.clear();
     vidKinds.forEach(kind => {
       const el = exVideos[kind];
       if (!el) return;
@@ -54,9 +74,12 @@
         el.setAttribute('src', src);
         el.load();
         el.muted = true;
-        // resume playback once the new source is ready (muted autoplay is allowed);
-        // calling play() synchronously after load() gets aborted by the load reset.
-        el.addEventListener('loadeddata', () => { el.play().catch(() => {}); }, { once: true });
+        // start all three together once every clip is ready
+        // (a synchronous play() after load() gets aborted by the load reset)
+        el.addEventListener('loadeddata', () => {
+          readySet.add(kind);
+          if (readySet.size === activeKinds().length) groupStart();
+        }, { once: true });
       }
     });
     if (oursPill) oursPill.textContent = `${t.success.ours} / ${t.success.total} ours`;
@@ -79,11 +102,16 @@
     }
   }));
 
-  // Explorer videos all loop muted in parallel so the user sees the
+  // Explorer videos play muted in parallel so the user sees the
   // comparison side-by-side. When the user unmutes one, re-mute the others
   // so the contact audio is clearly attributable to a single clip.
-  Object.values(exVideos).forEach(el => {
+  Object.entries(exVideos).forEach(([kind, el]) => {
     if (!el) return;
+    el.removeAttribute('loop');   // looping is managed by the group sync below
+    el.addEventListener('ended', () => {
+      endedSet.add(kind);
+      if (endedSet.size === activeKinds().length) groupStart();
+    });
     el.addEventListener('volumechange', () => {
       if (!el.muted) {
         Object.values(exVideos).forEach(other => {
@@ -103,10 +131,11 @@
           Object.values(exVideos).forEach(el => {
             if (!el) return;
             if (shouldPlay) {
-              // Don't restart a video already playing with sound
-              if (el.paused && el.muted) el.play().catch(() => {});
+              // Don't restart a video already playing with sound, and don't
+              // solo-restart an ended clip that is waiting for the group loop
+              if (el.paused && el.muted && !el.ended) el.play().catch(() => {});
             } else {
-              el.pause();
+              if (!el.ended) el.pause();
             }
           });
         });

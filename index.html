@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dreaming the Sound of Contact: Leveraging Video and Audio Generation for Zero-Shot Force-Aware Manipulation and Data Generation</title>
+  <meta name="description" content="Leveraging video and audio generation for zero-shot force-aware manipulation and data generation.">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Dreaming the Sound of Contact: Leveraging Video and Audio Generation for Zero-Shot Force-Aware Manipulation and Data Generation">
+  <meta property="og:description" content="Leveraging video and audio generation for zero-shot force-aware manipulation and data generation.">
+  <meta property="og:image" content="figs/concept.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/style.css?v=17">
+</head>
+<body>
+  <main class="page">
+
+    <!-- 1. HERO (editorial) ================================== -->
+    <section class="hero reveal">
+      <div class="row row--hero">
+        <div>
+          <!-- Animated brand mark: cute robot mascot taps the floor, sound waves emanate. -->
+          <span class="contact-pulse" aria-hidden="true">
+            <svg class="arm-anim" viewBox="0 0 220 120" xmlns="http://www.w3.org/2000/svg">
+              <!-- Floor line -->
+              <line x1="6" y1="110" x2="214" y2="110" stroke="#1a1420" stroke-width="1.4" opacity=".18"/>
+              <!-- Shadow under the mascot -->
+              <ellipse class="shadow" cx="72" cy="110" rx="34" ry="2.5" fill="#1a1420" opacity=".14"/>
+
+              <!-- Sound-wave arcs radiating from tap point (175, 107) -->
+              <g class="waves" fill="none" stroke-width="2.2" stroke-linecap="round">
+                <path class="wave w1" d="M 160 107 A 15 15 0 0 1 190 107" stroke="#ff6b8a"/>
+                <path class="wave w2" d="M 155 107 A 20 20 0 0 1 195 107" stroke="#b39cff"/>
+                <path class="wave w3" d="M 148 107 A 27 27 0 0 1 202 107" stroke="#7cd4b5"/>
+              </g>
+              <!-- Impact sparks -->
+              <g class="sparks">
+                <circle class="spark s1" cx="170" cy="96" r="1.8" fill="#ffc97a"/>
+                <circle class="spark s2" cx="182" cy="99" r="1.4" fill="#ff9e8c"/>
+                <circle class="spark s3" cx="162" cy="100" r="1.3" fill="#b39cff"/>
+                <circle class="spark s4" cx="188" cy="93" r="1.2" fill="#7cd4b5"/>
+              </g>
+
+              <!-- Mascot group (gently bobs) -->
+              <g class="mascot">
+                <!-- Antenna -->
+                <g class="antenna">
+                  <line x1="72" y1="48" x2="72" y2="32" stroke="#1a1420" stroke-width="2.4" stroke-linecap="round"/>
+                  <circle cx="72" cy="30" r="4.4" fill="#ff9e8c" stroke="#1a1420" stroke-width="1.4"/>
+                  <circle cx="70.5" cy="28.5" r="1.2" fill="#fff" opacity=".7"/>
+                </g>
+
+                <!-- Body -->
+                <rect x="42" y="48" width="60" height="58" rx="20"
+                      fill="#eae3ff" stroke="#1a1420" stroke-width="2"/>
+                <!-- Body side highlight -->
+                <path d="M 48 56 Q 46 80, 50 98" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".55"/>
+
+                <!-- Face visor -->
+                <rect x="50" y="60" width="44" height="24" rx="10" fill="#1a1420"/>
+
+                <!-- Eyes -->
+                <g class="eyes">
+                  <circle class="eye" cx="62" cy="72" r="3.2" fill="#fff"/>
+                  <circle class="eye" cx="82" cy="72" r="3.2" fill="#fff"/>
+                  <circle cx="63" cy="71" r=".9" fill="#6e7bff"/>
+                  <circle cx="83" cy="71" r=".9" fill="#6e7bff"/>
+                </g>
+
+                <!-- Cheeks -->
+                <circle cx="48" cy="86" r="2.6" fill="#ff9e8c" opacity=".72"/>
+                <circle cx="96" cy="86" r="2.6" fill="#ff9e8c" opacity=".72"/>
+
+                <!-- Left arm (idle, hanging) -->
+                <line x1="42" y1="72" x2="34" y2="88" stroke="#1a1420" stroke-width="3.4" stroke-linecap="round"/>
+                <circle cx="34" cy="88" r="4.4" fill="#b39cff" stroke="#1a1420" stroke-width="1.6"/>
+
+                <!-- Right arm — taps the floor. Rotates around shoulder (102, 72). -->
+                <g class="tap-arm">
+                  <line x1="102" y1="72" x2="140" y2="92"
+                        stroke="#1a1420" stroke-width="3.4" stroke-linecap="round"/>
+                  <line x1="140" y1="92" x2="172" y2="104"
+                        stroke="#1a1420" stroke-width="3.4" stroke-linecap="round"/>
+                  <circle cx="140" cy="92" r="2.4" fill="#6e7bff"/>
+                  <circle class="hand" cx="172" cy="104" r="5" fill="#b39cff" stroke="#1a1420" stroke-width="1.6"/>
+                </g>
+
+                <!-- Feet -->
+                <rect x="52" y="102" width="16" height="8" rx="4" fill="#6e7bff" stroke="#1a1420" stroke-width="1.6"/>
+                <rect x="76" y="102" width="16" height="8" rx="4" fill="#6e7bff" stroke="#1a1420" stroke-width="1.6"/>
+              </g>
+            </svg>
+            <span class="label">Contact → sound</span>
+          </span>
+
+          <h1>Dreaming the Sound of&nbsp;Contact</h1>
+          <p class="hero__subtitle">Leveraging video and audio generation for zero-shot force-aware manipulation and data generation.</p>
+          <div class="btn-row">
+            <a class="btn" href="#results">
+              Watch<span class="btn__arrow" aria-hidden="true">↓</span>
+            </a>
+            <!-- TODO: replace span with <a> when arXiv URL exists -->
+            <span class="btn btn--ghost btn--inactive" aria-disabled="true">
+              arXiv<span class="btn__tag">Coming Soon</span>
+            </span>
+            <!-- TODO: replace span with <a> when public repo URL exists -->
+            <span class="btn btn--ghost btn--inactive" aria-disabled="true">
+              Code<span class="btn__tag">Coming Soon</span>
+            </span>
+            <!-- TODO: replace span with <a> when dataset URL exists -->
+            <span class="btn btn--ghost btn--inactive" aria-disabled="true">
+              Dataset<span class="btn__tag">Coming Soon</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Concept figure on transparent background, no card treatment. -->
+        <div class="hero__visual">
+          <img src="figs/concept.png?v=11"
+               alt="Concept overview: three stacked panels showing generated video and audio, a robot contact point with force-direction and audio-magnitude annotations, and real-world execution examples — whiteboard wiping, carrot peeling, lamp button pressing, and box stacking."/>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. VIDEO EXPLORER (experiments, upfront) ============= -->
+    <section class="explorer section section--divided reveal" id="results">
+      <div class="explorer__head">
+        <p class="kicker">Experiments</p>
+        <h2>Video for motion, audio for force.</h2>
+        <p class="muted">
+          Pick a task and a run. Each row plays the <strong>generated</strong> reference video + audio, our <strong>force-aware</strong> execution on a Franka arm that tracks the audio-derived force profile, and a <strong>kinematic-only baseline</strong> for comparison.
+          <span class="sound-hint"><span class="sound-hint__icon" aria-hidden="true">🔊</span>Turn the sound on — the contact audio <em>is</em> the force signal.</span>
+        </p>
+      </div>
+
+      <div class="explorer__bar">
+        <div class="seg seg--task" role="tablist" aria-label="Select task">
+          <button type="button" class="seg__btn is-active" data-task="whiteboard">Whiteboard wiping</button>
+          <button type="button" class="seg__btn" data-task="carrot">Carrot peeling</button>
+          <button type="button" class="seg__btn" data-task="chocolate">Chocolate box stacking</button>
+          <button type="button" class="seg__btn" data-task="lamp">Lamp button</button>
+        </div>
+
+        <div class="explorer__right">
+          <span class="score-readout" id="score-readout">
+            <span class="score__pill score__pill--ours num" id="score-ours">6 / 6 ours</span>
+            <span class="score__pill score__pill--base num" id="score-base">0 / 6 base</span>
+          </span>
+          <div class="seg seg--run" role="tablist" aria-label="Select run">
+            <span class="seg__caption">Run</span>
+            <button type="button" class="seg__btn is-active" data-run="1">1</button>
+            <button type="button" class="seg__btn" data-run="2">2</button>
+            <button type="button" class="seg__btn" data-run="3">3</button>
+            <button type="button" class="seg__btn" data-run="4">4</button>
+            <button type="button" class="seg__btn" data-run="5">5</button>
+            <button type="button" class="seg__btn" data-run="6">6</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="explorer__videos">
+        <figure class="explorer__video">
+          <figcaption>
+            <span class="vlabel vlabel--gen">Generated</span>
+            <span class="vdesc">Video + Audio from Seedance 2.0</span>
+          </figcaption>
+          <video id="v-gen" data-kind="gen"
+                 src="videos/whiteboard_run1_gen.mp4?v=7"
+                 poster="videos/whiteboard_run1_gen.jpg?v=7"
+                 playsinline preload="metadata" controls muted></video>
+        </figure>
+        <figure class="explorer__video">
+          <figcaption>
+            <span class="vlabel vlabel--base">Baseline · kinematic</span>
+            <span class="vdesc">Same trajectory, no force regulation</span>
+          </figcaption>
+          <div class="video-wrap">
+            <video id="v-base" data-kind="base"
+                   src="videos/whiteboard_run1_base.mp4?v=7"
+                   poster="videos/whiteboard_run1_base.jpg?v=7"
+                   playsinline preload="metadata" controls muted></video>
+            <span class="video-badge">2×</span>
+          </div>
+        </figure>
+        <figure class="explorer__video">
+          <figcaption>
+            <span class="vlabel vlabel--ours">Ours · force-aware</span>
+            <span class="vdesc">Franka arm tracks the audio-derived force profile</span>
+          </figcaption>
+          <div class="video-wrap">
+            <video id="v-ours" data-kind="ours"
+                   src="videos/whiteboard_run1_ours.mp4?v=7"
+                   poster="videos/whiteboard_run1_ours.jpg?v=7"
+                   playsinline preload="metadata" controls muted></video>
+            <span class="video-badge">2×</span>
+          </div>
+        </figure>
+      </div>
+
+    </section>
+
+    <!-- 3. WALKTHROUGH (numbered timeline) =================== -->
+    <div class="tl">
+
+      <div class="stp reveal" id="idea">
+        <div class="stp__n">1</div>
+        <div class="stp__body">
+          <p class="kicker">The problem</p>
+          <h2>A video shows where, not how hard.</h2>
+          <div class="stp__grid">
+            <div><p>Video generators can now dream up a robot doing a task. Turn those frames into a trajectory and a real robot can copy the motion. But a video only shows <strong>where</strong> the arm goes, not <strong>how hard</strong> it presses. For wiping, peeling, or pressing a button, that missing force is the difference between finishing the job and hovering a few millimeters above the surface, or slamming into it and triggering a safety stop.</p></div>
+            <div><p>The generated <strong>audio</strong> fills the gap. Contact sounds get louder as contact gets harder, so we use loudness as a proxy for force. From one task description we generate video and audio, take the <strong>motion</strong> from the video and the <strong>force profile</strong> from the audio, and run both on a Franka Panda with a force regulator in the loop. Those executions are good enough to become training data, too.</p></div>
+          </div>
+          <div class="big">
+            <div class="base"><b class="num">8/40</b><span>motion only · baseline</span></div>
+            <div class="ours"><b class="num">36/40</b><span>motion + audio force · ours</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stp reveal" id="pipeline">
+        <div class="stp__n stp__n--alt">2</div>
+        <div class="stp__body">
+          <p class="kicker">The pipeline</p>
+          <h2>Four steps from a sentence to contact.</h2>
+          <ol class="steps">
+            <li><b>Generate</b>One RGB image plus a text prompt goes to Seedance&nbsp;2.0, which returns a video with audio (the exact prompts are <a href="#prompts">at the bottom</a>).</li>
+            <li><b>Motion from video</b>Find the gripper and object (MolmoPoint), segment them (SAM&nbsp;2), and track them in 3D (TAPIP3D) to get the end-effector path, the contact moments, and the force direction.</li>
+            <li><b>Force from audio</b>Isolate the contact sound (SAM-Audio) and turn its loudness into a force-magnitude profile over the contact interval.</li>
+            <li><b>Execute</b>A 1&nbsp;kHz impedance controller follows the path while a force regulator tracks the audio-derived profile during contact.</li>
+          </ol>
+          <div class="card card--aurora pipeline">
+            <img src="figs/pipeline.png?v=9" alt="Pipeline diagram: vision branch localizes, segments, and tracks in 3D to estimate force direction; audio branch isolates the contact sound and extracts loudness; the combined force-aware trajectory runs on a Franka Panda with closed-loop force regulation." />
+          </div>
+        </div>
+      </div>
+
+      <div class="stp reveal" id="force-profile">
+        <div class="stp__n stp__n--mint">3</div>
+        <div class="stp__body">
+          <p class="kicker">Sanity check</p>
+          <h2>Does the shape of the force matter?</h2>
+          <div class="stp__grid">
+            <div><p>If any contact force works, we could just press with a constant 10&nbsp;N and skip the audio. So we tried that. On wiping and peeling we ran the same trajectories with two audio-shaped profiles (peaking at 10 or 15&nbsp;N) and two constant profiles (10 and 15&nbsp;N), ten trials each.</p><p>Constant force fails at first contact: the command jumps from 0 to 10&nbsp;N in one step, the measured force overshoots toward the 20&nbsp;N limit, and the robot stops itself. The audio-shaped profile starts low and ramps up after contact, so it never trips the limit, and it finishes with a lower peak force and less total impulse.</p></div>
+            <figure class="vis">
+              <img src="figs/force_profile.png?v=12" alt="Desired (dashed) and measured (solid) force over the contact phase for variable 15 N (green) and constant 10 N (red) profiles on whiteboard wiping and carrot peeling; mean and one standard deviation over successful rollouts."/>
+              <figcaption class="muted">What the robot was asked to do (dashed) vs. what it actually did (solid). Green is the audio-shaped profile, red the constant one. The audio profile ramps in; the constant one steps in and overshoots.</figcaption>
+            </figure>
+          </div>
+      <div style="overflow-x:auto;margin-top:8px">
+      <table class="results-table">
+        <thead>
+          <tr><th style="text-align:left">Task</th><th style="text-align:left">Profile</th><th>Success</th><th>Peak (N)</th><th>Impulse (N·s)</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Wiping</th><td style="text-align:left">Variable, <em>F</em><sub>max</sub>&nbsp;=&nbsp;10</td><td class="num">7/10</td><td class="num"><strong>9.31 ± 1.43</strong></td><td class="num"><strong>15.20 ± 4.42</strong></td></tr>
+          <tr><th></th><td style="text-align:left">Variable, <em>F</em><sub>max</sub>&nbsp;=&nbsp;15</td><td class="num"><strong>10/10</strong></td><td class="num">12.38 ± 1.13</td><td class="num">21.50 ± 3.32</td></tr>
+          <tr><th></th><td style="text-align:left">Constant, 10&nbsp;N</td><td class="num">8/10</td><td class="num">12.86 ± 0.45</td><td class="num">25.71 ± 5.11</td></tr>
+          <tr><th></th><td style="text-align:left">Constant, 15&nbsp;N</td><td class="num">2/10</td><td class="num">15.36 ± 0.30</td><td class="num">30.28 ± 6.32</td></tr>
+          <tr><th>Peeling</th><td style="text-align:left">Variable, <em>F</em><sub>max</sub>&nbsp;=&nbsp;10</td><td class="num"><strong>9/10</strong></td><td class="num"><strong>8.76 ± 1.65</strong></td><td class="num"><strong>18.34 ± 5.16</strong></td></tr>
+          <tr><th></th><td style="text-align:left">Variable, <em>F</em><sub>max</sub>&nbsp;=&nbsp;15</td><td class="num"><strong>9/10</strong></td><td class="num">11.39 ± 1.52</td><td class="num">27.88 ± 9.74</td></tr>
+          <tr><th></th><td style="text-align:left">Constant, 10&nbsp;N</td><td class="num">8/10</td><td class="num">12.98 ± 1.42</td><td class="num">39.16 ± 11.13</td></tr>
+          <tr><th></th><td style="text-align:left">Constant, 15&nbsp;N</td><td class="num">6/10</td><td class="num">14.79 ± 0.93</td><td class="num">106.42 ± 61.97</td></tr>
+        </tbody>
+      </table>
+      </div>
+          <p class="muted" style="font-size:13px;margin-top:8px">Peak force and impulse: mean ± std over all 10 trials, including failures.</p>
+        </div>
+      </div>
+
+      <div class="stp reveal" id="policy">
+        <div class="stp__n">4</div>
+        <div class="stp__body">
+          <p class="kicker">Then train on it</p>
+          <h2>The pipeline is also a data engine.</h2>
+          <div class="stp__grid">
+            <div><p>Every successful execution is a demonstration with images, poses, and a force profile. So we let the pipeline collect <strong>50 demonstrations per task</strong> at random object positions and trained a <strong>Diffusion Policy</strong> on them: two camera views plus the end-effector pose in, poses out. We trained two versions, one that also sees the measured contact force and one that doesn't.</p></div>
+            <div><p>At test time there is <strong>no force regulator</strong>. The policy just commands poses on new object placements and appearances, and the contact force comes from how deep it learned to press. Without force input it succeeds in <strong class="num">29/40</strong> trials; with force input, <strong class="num">34/40</strong>. On most tasks the policy's force stays within about 2&nbsp;N of the demonstrations. Peeling is the exception: the policies press harder than the demos, and the one with force input presses hardest, which peels more reliably.</p></div>
+          </div>
+      <div style="overflow-x:auto;margin-top:8px">
+      <table class="results-table">
+        <thead>
+          <tr><th></th><th>Wiping</th><th>Peeling</th><th>Stacking</th><th>Pressing</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>DP w/o force input</th><td class="num">8/10</td><td class="num">8/10</td><td class="num">8/10</td><td class="num">5/10</td><td class="num">29/40</td></tr>
+          <tr><th>DP w/ force input</th><td class="num"><strong>9/10</strong></td><td class="num"><strong>10/10</strong></td><td class="num">8/10</td><td class="num"><strong>7/10</strong></td><td class="num"><strong>34/40</strong></td></tr>
+        </tbody>
+      </table>
+      </div>
+          <div class="figs2">
+            <img src="figs/policy_setup.jpg?v=13" alt="Experimental setups for whiteboard wiping, carrot peeling, lamp button pressing, and chocolate box stacking: Franka Panda arms with a RealSense L515 external camera and a wrist-mounted RealSense D455."/>
+            <img src="figs/policy_force.png?v=12" style="background:#fff" alt="Contact force over in-contact task progress for all four tasks: data collection (green), policy without force input (red), and policy with force input (blue), shown as mean and standard deviation."/>
+          </div>
+        </div>
+      </div>
+
+      <div class="stp reveal" id="prompts">
+        <div class="stp__n stp__n--mint">5</div>
+        <div class="stp__body">
+          <p class="kicker">Appendix</p>
+          <h2>The prompts we used.</h2>
+          <p>Every generation call is one shared system prompt with the task description dropped into it.</p>
+          <div class="prompt prompt--sys">
+            <span class="prompt__label">System prompt</span>
+            <pre class="mono">Video: The camera remains stationary while &lt;TASK SPECIFIC PROMPT&gt;.
+
+Audio: Emphasize the sound of physical interaction and contact force central to the action, while suppressing all ambient, background, and unrelated sounds.</pre>
+          </div>
+          <div class="prompt-grid">
+            <div class="prompt"><span class="prompt__label">Whiteboard wiping</span><pre class="mono">The gripper, holding the eraser, slowly wipes the black marks off the whiteboard from right to left once, then retracts at the end.</pre></div>
+            <div class="prompt"><span class="prompt__label">Carrot peeling</span><pre class="mono">The left gripper, holding the yellow peeler, slowly peels off a layer of the carrot skin, while the right gripper remains still.</pre></div>
+            <div class="prompt"><span class="prompt__label">Chocolate box stacking</span><pre class="mono">The gripper's left finger slides fully under the chocolate box, forms a fully stable grasp, and slowly puts it on the pile of books.</pre></div>
+            <div class="prompt"><span class="prompt__label">Lamp button pressing</span><pre class="mono">The gripper performs a single press on the white button on the table and then rises back up, while remaining closed.</pre></div>
+          </div>
+          <p class="muted" style="font-size:13px;margin-top:10px">Audio separation uses one SAM-Audio prompt for every task: “The sound of contact between gripper and &lt;object&gt;”.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 6. FOOTER ============================================ -->
+    <footer class="page-footer">
+      <span class="muted">Built with ♥</span>
+    </footer>
+  </main>
+  <script src="assets/app.js?v=13" defer></script>
+</body>
+</html>
